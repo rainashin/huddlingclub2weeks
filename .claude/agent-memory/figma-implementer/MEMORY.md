@@ -1,0 +1,1 @@
+- [Figma 컴포넌트 세트](reference_figma_components.md) — 파일키/노드 2168:966, 옮긴 날짜, 토큰에 없는 값 목록

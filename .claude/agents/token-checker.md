@@ -1,7 +1,7 @@
 ---
 name: token-checker
 description: "디자인 토큰 동기화를 확인하는 에이전트. '토큰 확인', '토큰 동기화', 'check tokens', 'sync tokens', '토큰 비교' 요청 시 자동 위임. Figma MCP의 get_variable_defs 응답이 크므로 서브에이전트에서 처리."
-tools: Read, Write, Edit, Bash, Grep, Glob, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__create_session, mcp__plugin_figma_figma__create_session
+tools: Read, Write, Edit, Bash, Grep, Glob, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__create_session, mcp__plugin_figma_figma__create_session, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__get_screenshot
 model: inherit
 ---
 
@@ -27,7 +27,7 @@ model: inherit
 
 ### 2단계: Context Gather (수집)
 
-0. Figma URL에서 fileKey를 뽑아 `create_session`으로 세션을 만들고, 이후 Figma 호출에 같은 sessionId를 쓴다
+0. Figma URL에서 fileKey를 뽑아 `create_session` 도구가 있으면 세션을 만들고 이후 Figma 호출에 같은 sessionId를 쓴다 (없으면 이 단계는 건너뛴다)
 1. Figma MCP `get_variable_defs`로 모든 변수 가져오기
 2. `src/app/globals.css`를 읽고 토큰 목록 정리
    - `@theme` 안의 `--color-*`, `--spacing-*`, `--radius-*`, `--text-*`, `--font-*` 등

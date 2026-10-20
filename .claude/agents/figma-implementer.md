@@ -1,7 +1,7 @@
 ---
 name: figma-implementer
 description: "Figma 디자인을 코드로 구현하는 전문 에이전트. Figma URL이 언급되거나, 'Figma 구현', '디자인 구현', 'implement design', 'implement figma' 같은 요청 시 자동 위임. Figma MCP 응답이 컨텍스트를 많이 차지하므로 반드시 이 서브에이전트에서 처리할 것."
-tools: Read, Write, Edit, Bash, Grep, Glob, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__create_session, mcp__plugin_figma_figma__create_session, Skill
+tools: Read, Write, Edit, Bash, Grep, Glob, mcp__plugin_figma_figma__get_variable_defs, mcp__plugin_figma_figma__get_metadata, mcp__plugin_figma_figma__get_design_context, mcp__plugin_figma_figma__get_screenshot, mcp__figma__get_variable_defs, mcp__figma__get_metadata, mcp__figma__get_design_context, mcp__figma__get_screenshot, mcp__figma__create_session, mcp__plugin_figma_figma__create_session, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_figma_skill, Skill
 model: inherit
 memory: project
 ---
@@ -25,7 +25,7 @@ memory: project
 Figma 디자인을 분석하고, 불명확한 부분을 사용자에게 확인합니다.
 
 1. Figma URL을 확인한다. URL이 없으면 `docs/figma-frames.md`에서 해당 화면의 URL을 찾고, 거기에도 없으면 사용자에게 묻는다
-2. Figma URL에서 fileKey와 nodeId를 뽑아(`node-id=1-2` → `1:2`) `create_session`으로 세션을 만들고, 이후 Figma 호출에 같은 sessionId를 쓴다
+2. Figma URL에서 fileKey와 nodeId를 뽑아(`node-id=1-2` → `1:2`) `create_session` 도구가 있으면 세션을 만들고 이후 Figma 호출에 같은 sessionId를 쓴다 (없으면 이 단계는 건너뛴다)
 3. `get_design_context`를 처음 호출하기 전에 Skill 도구로 `figma:figma-design-to-code` 스킬을 불러와 그 안내를 따른다
 4. Figma MCP로 `get_design_context` 호출하여 디자인 구조 파악
 5. `get_screenshot`로 시각적 레퍼런스 캡처
