@@ -16,12 +16,14 @@ export default function StatCard({
   return (
     <div
       className={[
-        "flex w-full flex-col items-center gap-inline-sm rounded-card px-control-x py-stack-md",
+        // justify-between: 좁은 화면에서 라벨이 2줄이 돼도 숫자는 세 카드 모두 아래에 맞춰진다
+        "flex w-full flex-col items-center justify-between gap-inline-sm rounded-card px-control-x py-stack-md",
         highlight ? "bg-info-subtle" : "bg-surface-subtle",
         className,
       ].join(" ")}
     >
-      <span className="text-caption-md text-text-secondary">{label}</span>
+      {/* break-keep: 줄이 바뀌어도 단어 중간에서 끊지 않는다 */}
+      <span className="break-keep text-center text-caption-md text-text-secondary">{label}</span>
       <span
         className={[
           "whitespace-nowrap text-title-lg",

@@ -17,6 +17,9 @@ export type RsvpResponse = {
   companions: number;
 };
 
+const NAME_MAX = 20; // 이름 최대 글자 수
+const COMPANIONS_MAX = 10; // 동반 인원 최대
+
 type RSVPCardProps = {
   state?: "form" | "done";
   // 제출 버튼을 누르면 입력값을 넘겨준다
@@ -37,13 +40,18 @@ export default function RSVPCard({
   const [companions, setCompanions] = useState(0);
   const statusLabelId = useId();
 
-  // 필수값(이름, 참석 여부)이 비어 있으면 버튼을 비활성으로 둔다
-  const canSubmit = name.trim() !== "" && status !== null;
+  // 필수값(이름, 참석 여부)이 비어 있거나 이름이 너무 길면 버튼을 비활성으로 둔다
+  // (화면 검사일 뿐이라, 저장할 때 서버에서 다시 검사해야 한다)
+  const trimmedName = name.trim();
+  const canSubmit =
+    trimmedName !== "" && trimmedName.length <= NAME_MAX && status !== null;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (name.trim() === "" || status === null) return;
-    onSubmit?.({ name: name.trim(), status, companions });
+    if (!canSubmit || status === null) return;
+    // 불참이면 동반 인원은 0명으로 보낸다
+    const count = status === "no" ? 0 : Math.min(Math.max(companions, 0), COMPANIONS_MAX);
+    onSubmit?.({ name: trimmedName, status, companions: count });
   }
 
   const cardClasses = [
@@ -89,6 +97,7 @@ export default function RSVPCard({
           label="이름"
           name="name"
           required
+          maxLength={NAME_MAX}
           placeholder="이름을 입력해주세요"
           value={name}
           onChange={(event) => setName(event.target.value)}
@@ -122,15 +131,23 @@ export default function RSVPCard({
           </div>
         </div>
 
-        <div className="flex w-full flex-col items-start gap-inline-md">
-          <Label as="span" required>
-            동반 인원
-          </Label>
-          <Stepper value={companions} onChange={setCompanions} min={0} />
-          <p className="text-caption-md text-text-tertiary">
-            본인을 제외하고 함께 오는 인원이에요.
-          </p>
-        </div>
+        {/* 불참을 고르면 동반 인원은 숨긴다 (0명으로 보낸다) */}
+        {status !== "no" && (
+          <div className="flex w-full flex-col items-start gap-inline-md">
+            <Label as="span" required>
+              동반 인원
+            </Label>
+            <Stepper
+              value={companions}
+              onChange={setCompanions}
+              min={0}
+              max={COMPANIONS_MAX}
+            />
+            <p className="text-caption-md text-text-tertiary">
+              본인을 제외하고 함께 오는 인원이에요.
+            </p>
+          </div>
+        )}
       </div>
 
       <Button type="submit" size="lg" disabled={!canSubmit} className="w-full">

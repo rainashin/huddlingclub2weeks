@@ -41,20 +41,20 @@ export default function SectionHeader({
       ].join(" ")}
     >
       {subtitle && (
-        <p className={["w-full text-label-md", colors.subtitle].join(" ")}>
+        <p className={["w-full wrap-break-word text-label-md", colors.subtitle].join(" ")}>
           {subtitle}
         </p>
       )}
       {title && (
         // whitespace-pre-line: 입력한 줄바꿈을 화면에 그대로 보여준다
         <TitleTag
-          className={["w-full whitespace-pre-line text-title-lg", colors.title].join(" ")}
+          className={["w-full whitespace-pre-line wrap-break-word text-title-lg", colors.title].join(" ")}
         >
           {title}
         </TitleTag>
       )}
       {description && (
-        <p className={["w-full text-body-md", colors.description].join(" ")}>
+        <p className={["w-full wrap-break-word text-body-md", colors.description].join(" ")}>
           {description}
         </p>
       )}

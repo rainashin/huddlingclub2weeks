@@ -3,6 +3,7 @@
 import { useId } from "react";
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
+import { useCopy } from "@/lib/useCopy";
 
 // Figma: CopyLinkField (2168:1000) — title · 링크 칸(InputField) · 복사 버튼(Button sm) · description
 // 발행 후 초대장 링크와 응답 현황 링크에 두 번 쓴다
@@ -20,6 +21,7 @@ export default function CopyLinkField({
   className = "",
 }: CopyLinkFieldProps) {
   const fieldId = useId();
+  const { result, copy } = useCopy();
 
   return (
     <div
@@ -33,8 +35,8 @@ export default function CopyLinkField({
       </label>
       <div className="flex w-full items-center gap-inline-md">
         <InputField id={fieldId} value={url} readOnly className="min-w-0 flex-1" />
-        <Button size="sm" onClick={() => navigator.clipboard.writeText(url)}>
-          복사
+        <Button size="sm" onClick={() => copy(url)}>
+          {result === "copied" ? "복사됨" : result === "failed" ? "실패" : "복사"}
         </Button>
       </div>
       <p className="text-caption-md text-text-tertiary">{description}</p>

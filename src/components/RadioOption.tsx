@@ -22,7 +22,7 @@ export default function RadioOption({
     <label
       className={[
         "flex items-center rounded-control",
-        "has-focus-visible:outline-2 has-focus-visible:outline-action-primary",
+        "has-focus-visible:outline-2 has-focus-visible:outline-border-accent",
         disabled ? "" : "cursor-pointer",
         className,
       ].join(" ")}

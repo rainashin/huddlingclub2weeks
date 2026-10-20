@@ -3,6 +3,7 @@
 
 export type Invitation = {
   id: string;
+  subtitle?: string; // 커버 맨 위 작은 글자 (선택)
   title: string;
   date: string; // ISO 형식 일시 (한국 시간)
   location: string; // 주소를 글자로만 표시
@@ -19,10 +20,11 @@ export type Rsvp = {
 
 export const mockInvitation: Invitation = {
   id: "3f9c2a7e-5b1d-4e8a-9c6f-2d7b8e1a4c90",
-  title: "민지의 집들이에 초대합니다",
-  date: "2026-11-21T18:00:00+09:00",
-  location: "서울특별시 마포구 월드컵북로 396, 101동 1203호",
-  body: "새 집으로 이사했어요!\n맛있는 음식 준비해 둘게요. 편하게 놀러 오세요.",
+  subtitle: "Huddling Club Year-End Networking",
+  title: "허들링 클럽 연말 네트워킹",
+  date: "2026-12-19T18:00:00+09:00",
+  location: "서울 성수동",
+  body: "한 해 동안 함께해 준 3기 멤버와 퍼디·버디를 초대해요.\n따뜻한 음식과 이야기 나누며 편안하게 한 해를 마무리해요.",
 };
 
 export const mockRsvps: Rsvp[] = [

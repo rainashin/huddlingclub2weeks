@@ -20,7 +20,7 @@ export default function StepButton({
       disabled={disabled}
       className={[
         "flex size-44 shrink-0 items-center justify-center rounded-control border border-border-default bg-surface-default",
-        "focus-visible:outline-2 focus-visible:outline-action-primary",
+        "focus-visible:outline-2 focus-visible:outline-border-accent",
         className,
       ].join(" ")}
       {...props}

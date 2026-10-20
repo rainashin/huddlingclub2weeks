@@ -13,7 +13,7 @@ export default function TextareaField({
       className={[
         "block w-full resize-none rounded-control border border-border-subtle bg-surface-default px-stack-md py-control-x text-body-lg text-text-primary",
         "placeholder:text-text-disabled",
-        "outline-none focus:border-action-primary",
+        "outline-none focus:border-border-accent",
         className,
       ].join(" ")}
       {...props}

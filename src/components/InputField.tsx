@@ -15,7 +15,7 @@ export default function InputField({
       className={[
         "h-45 w-full rounded-control border border-border-subtle bg-surface-default px-stack-md text-body-lg text-text-primary",
         "placeholder:text-text-disabled",
-        "outline-none focus:border-action-primary",
+        "outline-none focus:border-border-accent",
         className,
       ].join(" ")}
       {...props}

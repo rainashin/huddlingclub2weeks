@@ -26,9 +26,10 @@ export default function Radio({ state = "default", className = "" }: RadioProps)
         ].join(" ")}
       >
         <span
+          // 선택됨: 밝은 연두 원 위에서도 보이도록 안쪽 점을 어둡게 한다
           className={[
-            "rounded-pill bg-surface-default",
-            state === "selected" ? "size-8" : "size-16",
+            "rounded-pill",
+            state === "selected" ? "size-8 bg-text-strong" : "size-16 bg-surface-default",
           ].join(" ")}
         />
       </span>
